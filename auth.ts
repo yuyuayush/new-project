@@ -1,11 +1,10 @@
+import NextAuth from "next-auth";
+import GitHub from "next-auth/providers/github";
+import { AUTHOR_BY_GITHUB_ID_QUERY } from "@/sanity/lib/queries";
+import { client } from "@/sanity/lib/client";
+import { writeClient } from "@/sanity/lib/write-client";
 
-import NextAuth from "next-auth"
-import GitHub from "next-auth/providers/github"
-import { AUTHOR_BY_GITHUB_ID_QUERY } from "./sanity/lib/queries"
-import { writeClient } from "./sanity/lib/write-client";
-import { client } from "./sanity/lib/client";
- 
-export const { handlers, signIn, signOut, auth } = NextAuth({
+export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [GitHub],
   callbacks: {
     async signIn({
@@ -50,4 +49,5 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       return session;
     },
   },
-})
+
+});
